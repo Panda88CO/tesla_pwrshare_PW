@@ -88,8 +88,7 @@ class teslaPWAccess(teslaAccess):
             temp = self._callApi('GET','/products' )
             logging.debug('products: {} '.format(temp))
             if 'response' in temp:
-                for indx in range(0,len(temp['response'])):
-                    site = temp['response'][indx]
+                for indx, site in enumerate(temp['response']):
                     if 'energy_site_id' in site:
                         power_walls[str(site['energy_site_id' ])] = site
                         if 'total_pack_energy' in site:

@@ -1,0 +1,117 @@
+tesla_get_products: products: {
+'response': [
+{
+	'id': 1492931023396217, 
+	'user_id': 509791, 
+	'vehicle_id': 1942144632, 
+	'vin': 'vk9', 
+	'color': None, 
+	'access_type': 'OWNER', 
+	'display_name': 'K9', 
+	'option_codes': None, 
+	'cached_data': '',
+	'mobile_access_disabled': False, 
+	'granular_access': {'hide_private': False}, 
+	'tokens': None, 
+	'state': 'offline', 
+	'in_service': False, 
+	'id_s': '1492931023396217', 
+	'calendar_enabled': True, 
+	'api_version': 84, 
+	'backseat_token': None, 
+	'backseat_token_updated_at': None, 
+	'ble_autopair_enrolled': False, 
+	'device_type': 'vehicle', 
+	'command_signing': 'required', 
+	'release_notes_supported': True
+}, 
+{
+	'id': 3744586367764024, 
+	'user_id': 509791, 
+	'vehicle_id': 2252341262163257, 
+	'vin': 'vtruck', 
+	'color': None, 
+	'access_type': 'OWNER', 
+	'display_name': 'Starship', 
+	'option_codes': None, 
+	'cached_data': '=', 
+	'mobile_access_disabled': False, 
+	'granular_access': {'hide_private': False}, 
+	'tokens': None, 
+	'state': 'online', 
+	'in_service': False, 
+	'id_s': '3744586367764024', 
+	'calendar_enabled': True, 
+	'api_version': 84, 
+	'backseat_token': None, 
+	'backseat_token_updated_at': None, 
+	'ble_autopair_enrolled': False, 
+	'device_type': 'vehicle', 
+	'command_signing': 'required', 
+	'release_notes_supported': True, 
+	'bnd_enrolled': True
+}, 
+{
+	'energy_site_id': 2252354443221765, 
+	'device_type': 'energy', 
+	'resource_type': 'battery', 
+	'site_name': 'Home', 
+	'id': 'STE20240920-01459', 
+	'gateway_id': '1841000-02-B--GF2241830005MP', 
+	'asset_site_id': '1a8be5fd-a24c-463a-baef-4f06fd2b6e0b', 
+	'warp_site_number': 'STE20240920-01459', 
+	'battery_type': 'ac_powerwall', 
+	'battery_power': 0, 
+	'go_off_grid_test_banner_enabled': None, 
+	'storm_mode_enabled': True, 
+	'powerwall_onboarding_settings_set': False, 
+	'powerwall_tesla_electric_interested_in': None, 
+	'vpp_tour_enabled': None, 
+	'components': {
+		'battery': True, 
+		'battery_type': 'ac_powerwall', 
+		'solar': False, 
+		'grid': True, 
+		'load_meter': True, 
+		'market_type': 'residential', 
+		'wall_connectors':[
+			{'device_id': '3713f645-d530-4843-b957-0e7b4812a473', 
+			'din': '1734412-02-E--B7S24093J02773', 
+			'serial_number': 'B7S24093J02773', 
+			'part_number': '1734412-02-E', 
+			'is_active': True}], 
+		'gateways': [
+			{'device_id': '82e72c82-2ee7-404b-afee-05ec63680ed6', 
+			'din': '1841000-02-B--GF2241830005MP', 
+			'serial_number': 'GF2241830005MP', 
+			'part_number': '1841000-02-B', 
+			'is_active': True}]
+		}, 
+	'features': {'rate_plan_manager_no_pricing_constraint': True}}
+	], 
+	'count': 3
+} 
+
+
+live_status: 
+{'response': {
+	'solar_power': 0, 
+	'battery_power': 0, 
+	'load_power': 1341, 
+	'grid_status': 'Active', 
+	'grid_power': 1341, 
+	'generator_power': 0, 
+	'wall_connectors': [
+		{
+			'din': '1734412-02-E--B7S24093J02773', 
+			'wall_connector_state': 2, 
+			'wall_connector_fault_state': 2, 
+			'wall_connector_power': 0, 
+			'ocpp_status': 1, 
+			'powershare_session_state': 1}
+			], 
+	'island_status': 'on_grid', 
+	'storm_mode_active': False, 
+	'timestamp': '2025-04-10T20:36:17-05:00'
+	}
+} 

@@ -114,7 +114,7 @@ class tesla_info():
                         if 'components' in  PowerWalls[site]:
                             if 'solar' in PowerWalls[site]['components']:
                                 self.solarInstalled = PowerWalls[site]['components']['solar']
-                        if 'wall_connectors' in PowerWalls[site]:
+                            if 'wall_connectors' in PowerWalls[site]:
                                 self.wall_connectors = PowerWalls[site]['wall_connectors']
                     elif 'vin' in   products[site]:
 
