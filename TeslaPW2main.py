@@ -20,7 +20,7 @@ except ImportError:
     logging.basicConfig(level=30)
 
 
-VERSION = '0.2.00'
+VERSION = '0.0.01'
 class TeslaPWController(udi_interface.Node):
     from  udiLib import node_queue, wait_for_node_done, mask2key, heartbeat, bool2ISY, PW_setDriver
 
@@ -140,47 +140,6 @@ class TeslaPWController(udi_interface.Node):
             self.region = None
             self.poly.Notices['region'] = 'Region not specified (NA = Nort America + Asia (-China), EU = Europe. middle East, Africa, CN = China)'
    
-        if 'local_access_en' in self.customParameters:
-            if self.customParameters['local_access_en'] != '':
-                self.local_access_enabled = self.customParameters['local_access_en'].upper() == 'TRUE'
-        else:
-            logging.warning('No local_access_enabled found')
-            self.customParameters['local_access_en'] = 'True/False'
-
-        if 'cloud_access_en' in self.customParameters:      
-            if self.customParameters['cloud_access_en'] != '':
-                self.cloud_access_enabled = self.customParameters['cloud_access_en'].upper() == 'TRUE'
-        else:
-            logging.warning('No cloud_access_en found')
-            self.customParameters['cloud_access_en'] = 'True/False'
-
-        if 'LOCAL_USER_EMAIL' in self.customParameters:
-            if self.customParameters['LOCAL_USER_EMAIL'] != '':
-                self.LOCAL_USER_EMAIL= str(self.customParameters['LOCAL_USER_EMAIL'])
-        else:
-            logging.warning('No LOCAL_USER_EMAIL found')
-            self.customParameters['LOCAL_EMAIL'] = 'enter LOCAL_EMAIL'
-            self.LOCAL_USER_EMAIL = None
-
-        if 'LOCAL_USER_PASSWORD' in self.customParameters:
-            if self.customParameters['LOCAL_USER_PASSWORD'] != '':
-                self.LOCAL_USER_PASSWORD= str(self.customParameters['LOCAL_USER_PASSWORD'] )
-                #oauthSettingsUpdate['client_secret'] = self.customParameters['clientSecret']
-                #secret_ok = True
-        else:
-            logging.warning('No LOCAL_USER_PASSWORD found')
-            self.customParameters['LOCAL_USER_PASSWORD'] = 'enter LOCAL_USER_PASSWORD'
-            self.LOCAL_USER_PASSWORD = None
-
-        if 'LOCAL_IP_ADDRESS' in self.customParameters:
-            if self.customParameters['LOCAL_IP_ADDRESS'] != 'x.x.x.x':
-                self.LOCAL_IP_ADDRESS= str(self.customParameters['LOCAL_IP_ADDRESS'] )
-                #oauthSettingsUpdate['client_secret'] = self.customParameters['clientSecret']
-                #secret_ok = True
-        else:
-            logging.warning('No LOCAL_IP_ADDRESS found')
-            self.customParameters['LOCAL_IP_ADDRESS'] = 'enter LOCAL_IP_ADDRESS'
-            self.LOCAL_IP_ADDRESS = None
         logging.debug('customParamsHandler finish ')
         self.customParam_done = True
 
@@ -196,29 +155,10 @@ class TeslaPWController(udi_interface.Node):
             logging.info('Waiting for node to initialize')
             logging.debug(' 1 2 3: {} {} {}'.format(self.customParam_done ,self.TPW_cloud.customNsDone(), self.config_done))
             time.sleep(1)
-        logging.debug('access {} {}'.format(self.local_access_enabled, self.cloud_access_enabled))
-        
-
-        self.TPW = tesla_info(self.TPW_cloud)
+     
+        #self.TPW = tesla_info(self.TPW_cloud)
     
-        if self.local_access_enabled:
-            count = 1
-            self.localAccessUp = self.TPW.init_local(self.LOCAL_USER_EMAIL,self.LOCAL_USER_PASSWORD, self.LOCAL_IP_ADDRESS )
-            while not self.localAccessUp and count <= 10:
-                logging.error('local access not available - keep trying for 5 min')
-                time.sleep(30)
-                count += 1
-                self.localAccessUp = self.TPW.init_local(self.LOCAL_USER_EMAIL,self.LOCAL_USER_PASSWORD, self.LOCAL_IP_ADDRESS )
-            if count >= 10:
-                self.local_access_enabled = False
-                logging.error('Local access not possible - disabling it')
-                self.poly.Notices['local']  = 'local access fails - disabling local access'
-
-            #self.TPW_local.loginLocal()
-            #self.Gateway= self.TPW.get_GWserial_number()
-            #logging.debug('local GW {}'.format(self.GW))
-            ##site_string = self.poly.getValidAddress(str(self.GW))
-            #site_name = self.TPW_local.get_site_name()
+     
 
         if self.cloud_access_enabled:
             logging.debug('Attempting to log in via cloud auth')
@@ -228,7 +168,7 @@ class TeslaPWController(udi_interface.Node):
             #while not self.TPW_cloud.oauthHandlerRun():
             #    time.sleep(1)
             #    logging.info('Waiting to oauthHandler to execute')
-            while not self.TPW.cloud_authenticated():
+            while not self.TPW_cloud.authenticated():
                 logging.info('Waiting to authenticate to complete - press authenticate button')
                 self.poly.Notices['auth'] = 'Please initiate authentication'
                 time.sleep(5)

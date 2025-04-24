@@ -71,7 +71,6 @@ class teslaPWAccess(teslaAccess):
         self.site_info = {}
         self.site_live_info = {}
         #time.sleep(1)
-        self.PWiniitalized = True
         self.wall_connector = 0
         #while not self.handleCustomParamsDone:
         #    logging.debug('Waiting for customParams to complete - getAccessToken')
@@ -96,9 +95,9 @@ class teslaPWAccess(teslaAccess):
                         if 'total_pack_energy' in site:
                             self.total_pack_energy[str(site['energy_site_id' ])] = site['total_pack_energy' ] 
                         if 'wall_connectors' in site['components']:
-                            self.wall_connector = len(site['components']['wall_connectors'])
+                            nbr_wall_connectors = len(site['components']['wall_connectors'])
                 
-            return(power_walls)
+            return(power_walls, nbr_wall_connectors)
         except Exception as e:
             logging.error('tesla_get_products Exception : {}'.format(e))
 
